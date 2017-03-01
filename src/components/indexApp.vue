@@ -1,43 +1,72 @@
 <template>
-	<mybutton 
-		btntxt='传入三个函数'
-		:on-before-click=onBeforeClick
-		:on-click=onClick
-		:on-after-click=onAfterClick
-	>
-	</mybutton>
-	<mybutton
-		btntxt='只有before'
-		:on-before-click=onBeforeClick2
-	>	
-	</mybutton>
-	<mybutton
-		btntxt='只有click'
-		:on-click=onClick3
-	>	
-	</mybutton>
-	<mybutton
-		btntxt='只有after'
-		:on-after-click=onAfterClick4
-	>	
-	</mybutton>
-	<mybutton
-		btntxt='都没有'
-	>	
-	</mybutton>
+	<div>
+		<h1>button组件</h1>
+		<mybutton 
+			btntxt='传入三个函数'
+			:on-before-click=onBeforeClick
+			:on-click=onClick
+			:on-after-click=onAfterClick
+		>
+		</mybutton>
+		<mybutton
+			btntxt='只有before'
+			:on-before-click=onBeforeClick2
+		>	
+		</mybutton>
+		<mybutton
+			btntxt='只有click'
+			:on-click=onClick3
+		>	
+		</mybutton>
+		<mybutton
+			btntxt='只有after'
+			:on-after-click=onAfterClick4
+		>	
+		</mybutton>
+		<mybutton
+			btntxt='都没有'
+		>	
+		</mybutton>
+	</div>
+	<div>
+		<h1>SimpleTable组件</h1>
+		<simple-table :data="tableData">
+		    <column slot data-key="date" name="日期" width="130px"></column>
+		    <column slot data-key="name" name="姓名"></column>
+		    <column slot data-key="address" name="地址"></column>
+		</simple-table>
+	</div>
 </template>
 
 <script>
 	import mybutton from './comms/mybutton.vue';
+	import column from './comms/column.vue';
+	import simpleTable from './comms/simpleTable.vue';
 
 	export default{
 		components: {
-			mybutton
+			mybutton, simpleTable, column
 		},
 
 		data (){
 			return {
-
+				tableData: [{
+		            date: '2016-05-02',
+		            name: '王小虎',
+		            address: '上海市普陀区金沙江路 1518 弄'
+		        }, {
+		            date: '2016-05-04',
+		            name: '王小虎',
+		            address: '上海市普陀区金沙江路 1517 弄'
+		        }, {
+		            date: '2016-05-01',
+		            name: '王小虎',
+		            address: '上海市普陀区金沙江路 1519 弄'
+		        }, {
+		            date: '2016-05-03',
+		            name: '王小虎',
+		            address: '上海市普陀区金沙江路 1516 弄'
+		        }]
 			}
 		},
 
@@ -119,6 +148,10 @@
 					}, 1000);
 				})
 			}
+		},
+
+		ready (){
+			
 		}
 	}
 </script>
