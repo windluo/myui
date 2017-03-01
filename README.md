@@ -1,7 +1,6 @@
 ### test
 基于vuejs1.x写的button组件
-可复用组件，promise处理异步
-
+可复用组件，promise处理异步使用。使用时直接引入mybutton.vue即可
 ### 参数
 #### btntxt
 > string类型，配置按钮文本。默认值 '点击'
