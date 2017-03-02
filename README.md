@@ -1,9 +1,6 @@
 ### 说明
 基于vuejs1.x写的可复用组件
 ### Button组件
-#### btntxt
-> string类型，配置按钮文本。默认值 '点击'
-
 #### onBeforeClick
 >function类型，配置点击前事件。默认返回Promise.resolve
 
