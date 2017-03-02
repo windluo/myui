@@ -17,7 +17,8 @@ let config = Object.assign({}, baseConfig, {
         filename: './dist/bundle/[name]-[chunkhash:8].js',
         publicPath: defaultSettings.publicPath
     },
-    devtool: false,
+    // devtool: false,      //关闭map文件
+    devtool: 'source-map',      //查看完整的map源码
     plugins: baseConfig.plugins.concat([
         new webpack.optimize.DedupePlugin(),
         new webpack.DefinePlugin({
