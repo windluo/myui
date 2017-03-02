@@ -25,3 +25,12 @@
 
 #### name
 > 对应dataKey列的th
+
+#### align
+> 设置text-align
+
+#### width
+> 设置宽度
+
+#### style
+> 批量设置样式

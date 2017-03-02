@@ -28,12 +28,13 @@
 		>	
 		</mybutton>
 	</div>
+
 	<div>
 		<h1>SimpleTable组件</h1>
 		<simple-table :data="tableData">
-		    <column slot data-key="date" name="日期" width="130px"></column>
-		    <column slot data-key="name" name="姓名"></column>
-		    <column slot data-key="address" name="地址"></column>
+		    <column data-key="date" name="日期" width="130px"></column>
+		    <column data-key="name" name="姓名" align="left"></column>
+		    <column data-key="address" name="地址" style="width:300px;text-aligh:center"></column>
 		</simple-table>
 	</div>
 </template>

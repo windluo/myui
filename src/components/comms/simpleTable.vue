@@ -13,7 +13,6 @@
             <tbody>
             <tr v-for="(rowIndex, trData) in data | table rule" class="row_{{rowIndex+1}}">
                 <td v-for="(colIndex, tdData) in trData"
-                    track-by="$index"
                     :style="getStyle(rule[colIndex])"
                     class="col_{{colIndex+1}}">
                     {{render(tdData, rule[colIndex])}}
@@ -29,20 +28,22 @@
         <slot></slot>
     </div>
 </template>
+
 <script>
-    import Vue from 'vue'
-    var util = Vue.util;
     export default {
         props: ['data'],
+
         data: function () {
             return {
                 rule: []
             }
         },
+
         filters: {
             table: function (data, rule) {
                 var arr = data.slice(0);
                 var _arr = [];
+
                 arr.forEach(function (trDate) {
                     var __arr = [];
                     for (var i = 0; i < rule.length; i++) {
@@ -50,48 +51,43 @@
                     }
                     _arr.push(__arr);
                 });
+
                 return _arr
             }
         },
+
         ready: function () {
-            var _this = this;
-            console.log(this.$children);
+        	var _this = this;
+
             this.$children.forEach(function (child) {
                 //把column的配置整合到rule中
                 var obj = {};
-                console.log(child);
                 for(var p in child._props){
                     obj[p] = child[p]
                 }
+
                 _this.rule.push(obj)
             })
-            console.log(this.rule);
         },
+
         methods: {
             //渲染列 可以根据类型渲染不同的样式，比如说渲染普通文本，渲染数字，渲染过滤后的文本，可以自定义渲染的td
             render: function (tdData, rule) {
-                //如果filter存在
-                if(rule.filter){
-                    var filter = rule.filter;
-                    if(typeof filter == "string"){
-                        tdData = (this[filter] && this[filter](tdData)) || tdData;
-                    }else if(util.isArray(filter)){
-                        var theOne = filter.filter(function (o) {
-                            return o.key == tdData;
-                        });
-                        if(theOne.length > 0){
-                            tdData = theOne[0].value
-                        }
-                    }
-                }
                 return tdData
             },
             //设置样式
             getStyle: function (col) {
-                return {
-                    "text-align" : col.align,
-                    "width" : col.width
-                }
+            	var style = '';
+            	if(col.style){
+            		style = col.style;
+            	}else{
+            		style = {
+	                    "text-align" : col.align,
+	                    "width" : col.width
+	                }
+            	}
+            	
+                return style;
             },
             //触发action动作
             fireAction: function (action, rowData, event) {
@@ -113,6 +109,7 @@
         }
     }
 </script>
+
 <style scoped>
     table {
         width: 100%;
