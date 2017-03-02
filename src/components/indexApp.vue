@@ -2,39 +2,42 @@
 	<div>
 		<h1>button组件</h1>
 		<mybutton 
-			btntxt='传入三个函数'
 			:on-before-click=onBeforeClick
 			:on-click=onClick
 			:on-after-click=onAfterClick
 		>
+		传入三个函数
 		</mybutton>
 		<mybutton
-			btntxt='只有before'
 			:on-before-click=onBeforeClick2
 		>	
+		只有before
 		</mybutton>
 		<mybutton
-			btntxt='只有click'
 			:on-click=onClick3
 		>	
+		只有click
 		</mybutton>
 		<mybutton
-			btntxt='只有after'
 			:on-after-click=onAfterClick4
 		>	
+		只有after
 		</mybutton>
 		<mybutton
-			btntxt='都没有'
 		>	
+		都没有
 		</mybutton>
 	</div>
 
 	<div>
 		<h1>SimpleTable组件</h1>
 		<simple-table :data="tableData">
-		    <column data-key="date" name="日期" width="130px"></column>
-		    <column data-key="name" name="姓名" align="left"></column>
-		    <column data-key="address" name="地址" style="width:300px;text-aligh:center"></column>
+		    <column data-key="date" name="日期" width="120px"></column>
+		    <column data-key="name" name="姓名"></column>
+		    <column data-key="address" name="地址"></column>
+		    <column name="操作">
+		    	<mybutton>编辑</mybutton>
+		    </column>
 		</simple-table>
 	</div>
 </template>

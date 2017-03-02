@@ -15,12 +15,7 @@
                 <td v-for="(colIndex, tdData) in trData"
                     :style="getStyle(rule[colIndex])"
                     class="col_{{colIndex+1}}">
-                    {{render(tdData, rule[colIndex])}}
-                    <template v-if="tdData === null && rule[colIndex].action">
-                        <span v-for="actionItem in rule[colIndex].action" @click.stop="fireAction(actionItem, data[rowIndex], $event)">
-                            {{actionItem.text}}
-                        </span>
-                    </template>
+                    {{render(tdData, rule[colIndex])}}       
                 </td>
             </tr>
             </tbody>
@@ -62,6 +57,7 @@
             this.$children.forEach(function (child) {
                 //把column的配置整合到rule中
                 var obj = {};
+                console.log(child);
                 for(var p in child._props){
                     obj[p] = child[p]
                 }
@@ -86,7 +82,7 @@
 	                    "width" : col.width
 	                }
             	}
-            	
+
                 return style;
             },
             //触发action动作

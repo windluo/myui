@@ -18,7 +18,7 @@
 </style>
 
 <template>
-	<button class="btn" :class="{disabled: btndisabled}" @click="handlerClick">{{btntxt}}</button>
+	<button class="btn" :class="{disabled: btndisabled}" @click="handlerClick"><slot></slot></button>
 </template>
 
 <script>
