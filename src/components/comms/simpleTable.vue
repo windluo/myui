@@ -15,7 +15,7 @@
                 <td v-for="(colIndex, tdData) in trData"
                     :style="getStyle(rule[colIndex])"
                     class="col_{{colIndex+1}}">
-                    {{render(tdData, rule[colIndex])}}       
+                    {{render(tdData, rule[colIndex])}}
                 </td>
             </tr>
             </tbody>
