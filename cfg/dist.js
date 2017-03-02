@@ -17,7 +17,7 @@ let config = Object.assign({}, baseConfig, {
         filename: './dist/bundle/[name]-[chunkhash:8].js',
         publicPath: defaultSettings.publicPath
     },
-    devtool: 'sourcemap',
+    devtool: false,
     plugins: baseConfig.plugins.concat([
         new webpack.optimize.DedupePlugin(),
         new webpack.DefinePlugin({

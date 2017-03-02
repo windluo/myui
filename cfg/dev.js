@@ -11,8 +11,7 @@ let BowerWebpackPlugin = require('bower-webpack-plugin');
 let config = Object.assign({}, baseConfig, {
     entry: defaultSettings.entries('dev'),
     cache: true,
-    // devtool: 'eval-source-map',
-    devtool: '#source-map',
+    devtool: 'cheap-module-eval-source-map',
     plugins: baseConfig.plugins.concat([
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NoErrorsPlugin(),
