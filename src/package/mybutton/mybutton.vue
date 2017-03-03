@@ -15,18 +15,25 @@
 		border-color: #aaa;
 		background: #aaa;
 	}
+
+	.btn.del{
+		background: red;
+		border-color: red;
+	}
 </style>
 
 <template>
-	<button class="btn" :class="{disabled: btndisabled}" @click="handlerClick"><slot></slot></button>
+	<button class="btn" :class="{disabled: btndisabled, del: del==1}" @click="handlerClick"><slot></slot></button>
 </template>
 
 <script>
 	export default{
+		name: 'mybutton',
+		
 		props: {
-			btntxt: {
-				type: String,
-				default: '点击'
+			del: {
+				type: Number,
+				default: 0
 			},
 
 			onBeforeClick: {

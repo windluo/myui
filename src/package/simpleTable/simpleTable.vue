@@ -8,29 +8,70 @@
                     :style="getStyle(item)">
                     {{item.name}}
                 </th>
+                <th v-if='edit==1||del==1'>操作</th>
             </tr>
             </thead>
             <tbody>
             <tr v-for="(rowIndex, trData) in data | table rule" class="row_{{rowIndex+1}}">
                 <td v-for="(colIndex, tdData) in trData"
                     :style="getStyle(rule[colIndex])"
+                    track-by="$index"
                     class="col_{{colIndex+1}}">
                     {{render(tdData, rule[colIndex])}}
+                </td>
+                <td v-if='edit==1||del==1'>
+                	<div class="btn-cont">
+                		<mybutton v-if='edit==1'
+                			:on-before-click='getCurcolData(data[rowIndex])'
+                		>编辑
+                		</mybutton>
+                		<mybutton v-if='del==1'
+                			:del=1
+                			:on-before-click='delCurcolData(data[rowIndex], rowIndex)'
+                		>删除
+                		</mybutton>
+                	</div>
                 </td>
             </tr>
             </tbody>
         </table>
         <slot></slot>
+        <div v-show='curshow'>
+        	<p>日期：{{curcol.date}}</p>
+        	<p>姓名：{{curcol.name}}</p>
+        	<p>地址：{{curcol.address}}</p>
+        </div>
     </div>
 </template>
 
 <script>
     export default {
-        props: ['data'],
+    	name: 'simpleTable',
 
-        data: function () {
+        props: {
+        	data: {
+        		type: Array,
+		        default: function() {
+		          	return [];
+		        }
+        	},
+
+        	edit: {
+                type: Number,
+                default: 0
+            },
+
+            del: {
+                type: Number,
+                default: 0
+            }
+        },
+        
+        data() {
             return {
-                rule: []
+                rule: [],
+                curshow: false,
+		        curcol: {}
             }
         },
 
@@ -51,18 +92,30 @@
             }
         },
 
+        created (){
+        	// console.log(this);
+        },
+
+        beforeCompile (){
+        	// console.log(this);
+        },
+
+        compiled (){
+        	// console.log(this);
+        },
+
         ready: function () {
         	var _this = this;
-
             this.$children.forEach(function (child) {
-                //把column的配置整合到rule中
-                var obj = {};
-                console.log(child);
-                for(var p in child._props){
-                    obj[p] = child[p]
-                }
+                if(child.$el.nodeName == '#text'){
+                	var obj = {};
+	                for(var p in child._props){
 
-                _this.rule.push(obj)
+	                    obj[p] = child[p]
+	                }
+
+	                _this.rule.push(obj)
+                }
             })
         },
 
@@ -101,7 +154,30 @@
                     "2" : "无效"
                 };
                 return arr[value]
-            }
+            },
+
+            getCurcolData (data){
+            	var _this = this;
+
+            	return function(){
+            		return new Promise( function (resolve, reject) {
+	            		_this.curcol = data;
+	            		_this.curshow = true;
+						resolve();
+					})
+            	}
+            },
+
+            delCurcolData (data, index){
+            	var _this = this;
+
+            	return function(){
+            		return new Promise( function (resolve, reject) {
+	            		_this.data.splice(index, 1);
+						resolve();
+					})
+            	}
+            }         
         }
     }
 </script>
@@ -122,5 +198,13 @@
     }
     th{
         background-color: #e8e8e8;
+    }
+
+	.btn-cont{
+		text-align: center;
+	}
+
+    .btn-cont button{
+    	display: inline-block;
     }
 </style>

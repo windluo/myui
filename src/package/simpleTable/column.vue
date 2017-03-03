@@ -3,6 +3,8 @@
 </template>
 <script>
     export default {
+        name: 'column',
+
         props: {
             dataKey: {
                 type: String
@@ -20,7 +22,11 @@
             
             width: String,
 
-            style: String
+            style: String,
+
+            template: {
+                type: String
+            }
         },
 
         data: function () {
@@ -28,7 +34,7 @@
         },
 
         ready: function () {
-            
+
         }
     }
 </script>

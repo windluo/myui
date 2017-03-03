@@ -1,3 +1,8 @@
+<style type="text/css">
+	.add{
+		color: red;
+	}
+</style>
 <template>
 	<div>
 		<h1>button组件</h1>
@@ -31,27 +36,17 @@
 
 	<div>
 		<h1>SimpleTable组件</h1>
-		<simple-table :data="tableData">
+		<simple-table :data="tableData" :edit=1 :del=1>
 		    <column data-key="date" name="日期" width="120px"></column>
 		    <column data-key="name" name="姓名"></column>
 		    <column data-key="address" name="地址"></column>
-		    <column name="操作">
-		    	<mybutton>编辑</mybutton>
-		    </column>
+		    <column name="操作" ></column>
 		</simple-table>
 	</div>
 </template>
 
 <script>
-	import mybutton from './comms/mybutton.vue';
-	import column from './comms/column.vue';
-	import simpleTable from './comms/simpleTable.vue';
-
 	export default{
-		components: {
-			mybutton, simpleTable, column
-		},
-
 		data (){
 			return {
 				tableData: [{
@@ -155,7 +150,7 @@
 		},
 
 		ready (){
-			
+			console.log(this);
 		}
 	}
 </script>
