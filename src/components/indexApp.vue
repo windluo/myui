@@ -1,30 +1,25 @@
-<style type="text/css">
-	.add{
-		color: red;
-	}
-</style>
 <template>
 	<div>
 		<h1>button组件</h1>
 		<mybutton 
-			:on-before-click=onBeforeClick
-			:on-click=onClick
-			:on-after-click=onAfterClick
+			:on-before-click='onBeforeClick'
+			:on-click='onClick'
+			:on-after-click='onAfterClick'
 		>
 		传入三个函数
 		</mybutton>
 		<mybutton
-			:on-before-click=onBeforeClick2
+			:on-before-click='onBeforeClick2'
 		>	
 		只有before
 		</mybutton>
 		<mybutton
-			:on-click=onClick3
+			:on-click='onClick3'
 		>	
 		只有click
 		</mybutton>
 		<mybutton
-			:on-after-click=onAfterClick4
+			:on-after-click='onAfterClick4'
 		>	
 		只有after
 		</mybutton>
@@ -36,12 +31,16 @@
 
 	<div>
 		<h1>SimpleTable组件</h1>
-		<simple-table :data="tableData" :edit=1 :del=1>
+		<simple-table :data="tableData" :edit='1' :del='1'>
 		    <column data-key="date" name="日期" width="120px"></column>
 		    <column data-key="name" name="姓名"></column>
 		    <column data-key="address" name="地址"></column>
-		    <column name="操作" ></column>
 		</simple-table>
+	</div>
+
+	<div>
+		<h1>SelectBox组件</h1>
+		<select-box :options="selectData"></select-box>
 	</div>
 </template>
 
@@ -65,7 +64,9 @@
 		            date: '2016-05-03',
 		            name: '王小虎',
 		            address: '上海市普陀区金沙江路 1516 弄'
-		        }]
+		        }],
+		    selectData: [{value: '全部'}, {value: '待付款'}, {value: '审核中'}, {value: '购买中'},
+                    {value: '已到期'}, {value: '已终止'}, {value: '已完成'}, {value: '未通过'}]
 			}
 		},
 
@@ -150,7 +151,12 @@
 		},
 
 		ready (){
-			console.log(this);
+			// console.log(this);
 		}
 	}
 </script>
+<style type="text/css">
+	.add{
+		color: red;
+	}
+</style>

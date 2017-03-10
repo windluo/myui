@@ -28,8 +28,8 @@ function getDefaultModules() {
                 exclude: /node_modules/ 
             },
             {
-                test: /\.css$/,
-                loader: ExtractTextPlugin.extract("style-loader", "css-loader")
+                test: /\.(css|less)$/,
+                loader: ExtractTextPlugin.extract("style", "css!less")
             },
             { 
                 test: /\.(eot|woff|woff2|svg|ttf)([\?]?.*)$/, 
