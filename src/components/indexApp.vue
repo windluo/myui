@@ -65,8 +65,8 @@
 		            name: '王小虎',
 		            address: '上海市普陀区金沙江路 1516 弄'
 		        }],
-		    selectData: [{value: '全部'}, {value: '待付款'}, {value: '审核中'}, {value: '购买中'},
-                    {value: '已到期'}, {value: '已终止'}, {value: '已完成'}, {value: '未通过'}]
+		    selectData: [{value: 0, text: '全部'}, {value: 1, text: '待付款'}, {value: 2, text: '审核中'}, {value: 3, text: '购买中'},
+                    {value: 4, text: '已到期'}, {value: 5, text: '已终止'}, {value: 6, text: '已完成'}, {value: 7, text: '未通过'}]
 			}
 		},
 

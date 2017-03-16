@@ -1,11 +1,11 @@
 <template>
   <div class="Control2-selectbox">
-    <div class="value-container" :class="{selectShow:visible, default:value==='请选择'}" @click="visible=!visible">
-      {{value}}
+    <div class="value-container" :class="{selectShow:visible, default:value==='请选择'}" @click="showSelectBox">
+      {{text}}
     </div>
     <div class="select-ul-container" v-show="visible" transition="expand">
       <ul class="select-ul">
-        <li class="select-li" :class="{selectLiActived:currentLi === $index || defaultIndex === $index}" v-for="data in options" @click="handleGetCurrentLi(data, $index)">{{data.value}}</li>
+        <li class="select-li" :class="{selectLiActived:currentLi === $index || defaultIndex === $index}" v-for="data in options" @click="handleGetCurrentLi(data, $index)">{{data.text}}</li>
       </ul>
     </div>
     <div class="select-arrow" :class="{show:visible}"></div>
@@ -35,7 +35,7 @@
     data () {
       return {
         currentLi: '',
-        value: '请选择'
+        text: '请选择'
       }
     },
     methods: {
@@ -45,16 +45,41 @@
         }
 
         this.currentLi = index
-        this.value = data.value
+        this.text = data.text
         this.visible = false
         if (typeof this.onClick === 'function') {
           this.onClick(data)
+        }
+      },
+      showSelectBox () {
+        this.visible = !this.visible
+      },
+      showAddEventListener () {
+        let _this = this
+        _this.showEventListener = function (e) {
+          if (_this.$el && !_this.$el.contains(e.target)) {
+            _this.visible = false
+          }
+        }
+
+        document.addEventListener('click', _this.showEventListener)
+      },
+      showRemoveEventListener () {
+        document.removeEventListener('click', this.showEventListener)
+      }
+    },
+    watch: {
+      visible () {
+        if (this.visible) {
+          this.showAddEventListener()
+        } else {
+          this.showRemoveEventListener()
         }
       }
     },
     ready () {
       if (this.defaultIndex !== null && this.defaultIndex < this.options.length) {
-        this.value = this.options[this.defaultIndex].value
+        this.text = this.options[this.defaultIndex].text
       }
     }
   }
