@@ -42,9 +42,12 @@
 		<h1>SelectBox组件</h1>
 		<select-box :options="selectData"></select-box>
 	</div>
+
+	<mybutton :on-click='showToast'>看Toast</mybutton>
 </template>
 
 <script>
+	import Toast from '../package/Toast/Toast'
 	export default{
 		data (){
 			return {
@@ -71,6 +74,13 @@
 		},
 
 		methods: {
+			showToast () {
+				return Promise.resolve()
+					.then(() => {
+						Toast.show('我是Toast')
+					})
+			},
+
 			onBeforeClick (){
 				return new Promise( function (resolve, reject) {
 					setTimeout(function(){
