@@ -61,29 +61,7 @@
       },
       hideSelectBox () {
         this.visible = false
-      },
-      showAddEventListener () {
-        let _this = this
-        _this.showEventListener = function (e) {
-          if (_this.$el && !_this.$el.contains(e.target)) {
-            _this.visible = false
-          }
-        }
-
-        document.addEventListener('click', _this.showEventListener)
-      },
-      showRemoveEventListener () {
-        document.removeEventListener('click', this.showEventListener)
       }
-    },
-    watch: {
-      // visible () {
-      //   if (this.visible) {
-      //     this.showAddEventListener()
-      //   } else {
-      //     this.showRemoveEventListener()
-      //   }
-      // }
     },
     ready () {
       if (this.defaultIndex !== null && this.defaultIndex < this.options.length) {
