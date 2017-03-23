@@ -77,7 +77,7 @@
 			showToast () {
 				return Promise.resolve()
 					.then(() => {
-						Toast.show('我是Toast')
+						Toast.show({msg: '我是Toast', type: 'error', confirm: true})
 					})
 			},
 

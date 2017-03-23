@@ -15,41 +15,40 @@
 		el: document.body.appendChild(document.createElement('div')),
 		template: `
 			<div class="comm-tips-c">
-				<div class="comm-tips" v-show="showFlag" transition="toast" :class="{success:type==='success', error:type==='erroe'}"">
+				<div class="comm-tips" v-show="showFlag" transition="toast" :class="{success:type==='success', error:type==='error'}">
 					<p id="commmsg" class="comm-msg">{{msg}}</p>
 					<div class="confirm-c" v-if="confirm">
-						<button class="tip-btn" @click="cancelToast">取消</button>
-						<button class="tip-btn" @click="confirmToast">确定</button>
+						<button class="tip-btn cancel-btn" @click="cancelToast">取消</button>
+						<button class="tip-btn confirm-btn" @click="confirmToast">确定</button>
 					</div>
 				</div>
 			</div>
 		`,
-		props: {
-			confirmBack: {
-				type: Function
-			}
-		},
 		data () {
 			return {
 				showFlag: false,
 				type: '',
 				confirm: false,
-				msg: ''
+				msg: '',
+				confirmBack: '',
+				hideTime: ''
 			}
 		},
 		methods: {
-			show (msg, type, confirm) {
+			show (options) {
 				// msg: 提示信息
 				// type: 提示类型，对应样式
 				// confirm：是否需要按钮
-				this.msg = msg
-				this.type = this.switchType(type)
-				this.confirm = confirm === undefined ? false : confirm
+				this.msg = options.msg
+				this.type = this.switchType(options.type)
+				this.confirm = options.confirm === undefined ? false : options.confirm
+				this.confirmBack = options.confirmBack
+				this.hideTime = options.hideTime || 2400
 				this.showFlag = true
 
 				setTimeout(() => {
 					this.showFlag = false
-				}, 1500)
+				}, this.hideTime)
 			},
 			switchType (val) {
 				let res = ''
@@ -86,23 +85,21 @@
 	z-index: 999999;
 	.comm-tips{
 		width: 300px;
-		height: 40px;
 		-webkit-box-shadow: 1px 2px 10px #ccc;
 		box-shadow: 1px 2px 10px #ccc;
 		margin: 0 auto;
-		transform: translateY(-100%);
 		text-align: center;
 		font-size: 16px;
 	}
 
 	.toast-transition {
-	  -webkit-transition: all ease 700ms;
-		transition: all ease 700ms;
+	  -webkit-transition: all linear 600ms;
+		transition: all linear 600ms;
 	}
 
 	.toast-enter,
-	.toast-leave {
-	  transform: translateY(0);
+	.toast-leave{
+		transform: translateY(-100%);
 	}
 
 	.comm-tips.success{
@@ -123,16 +120,39 @@
 
 	.comm-msg{
 		padding: 8px 10px;
+		margin: 0;
 	}
 
 	.confirm-c{
-		display: none;
-	    padding: 6px 10px;
+	  padding: 6px 10px;
 	}
 
 	.tip-btn{
-		display: none;
-		background: none;
+		color: #fff;
+		padding: 6px 10px;
+		border: none;
+		outline: none;
+		cursor: pointer;
+	}
+
+	.confirm-btn{
+		background: #2db7f5;
+		&:hover{
+			background: lighten(#2db7f5, 2%)
+		}
+		&:active{
+			background: lighten(#2db7f5, 4%)
+		}
+	}
+
+	.cancel-btn{
+		background: #ff0000;
+		&:hover{
+			background: lighten(#ff0000, 2%)
+		}
+		&:active{
+			background: lighten(#ff0000, 4%)
+		}
 	}
 }
 </style>

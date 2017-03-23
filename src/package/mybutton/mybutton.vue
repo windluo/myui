@@ -1,27 +1,3 @@
-<style>
-	p{margin: 0; margin-top: 10px; color: #999; font-size: 13px;}
-
-	.btn{
-		border: 1px solid #2db7f5;
-		background: #2db7f5;
-		color: #fff;
-		font-size: 14px;
-		padding: 6px 14px;
-		outline: none;
-		margin-right: 20px;
-	}
-
-	.btn.disabled{
-		border-color: #aaa;
-		background: #aaa;
-	}
-
-	.btn.del{
-		background: red;
-		border-color: red;
-	}
-</style>
-
 <template>
 	<button class="btn" :class="{disabled: btndisabled, del: del==1}" @click="handlerClick"><slot></slot></button>
 </template>
@@ -88,3 +64,40 @@
 		}
 	}
 </script>
+
+<style lang="less">
+	.btn{
+		border: 1px solid #2db7f5;
+		background: #2db7f5;
+		color: #fff;
+		font-size: 14px;
+		padding: 6px 14px;
+		outline: none;
+		margin-right: 20px;
+		cursor: pointer;
+		-webkit-transition: background ease .3s;
+		transition: background ease .3s;
+		&:hover{
+			background: lighten(#2db7f5, 4%);
+		}
+		&:active{
+			background: lighten(#2db7f5, 10%);
+		}
+	}
+
+	.btn.disabled{
+		border-color: #aaa;
+		background: #aaa;
+	}
+
+	.btn.del{
+		background: #ff0000;
+		border-color: #ff0000;
+		&:hover{
+			background: lighten(#ff0000, 12%);
+		}
+		&:active{
+			background: lighten(#ff0000, 20%);
+		}
+	}
+</style>
