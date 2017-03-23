@@ -42,6 +42,10 @@
 		<h1>SelectBox组件</h1>
 		<select-box :options="selectData"></select-box>
 	</div>
+	<div style="margin-left:400px">
+		<h1>SelectBox组件</h1>
+		<select-box :options="selectData"></select-box>
+	</div>
 
 	<mybutton :on-click='showToast'>看Toast</mybutton>
 </template>

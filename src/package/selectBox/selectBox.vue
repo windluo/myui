@@ -1,5 +1,5 @@
 <template>
-  <div class="Control2-selectbox">
+  <div class="Control2-selectbox" v-clickotherarea="hideSelectBox">
     <div class="value-container" :class="{selectShow:visible, default:value==='请选择'}" @click="showSelectBox">
       {{text}}
     </div>
@@ -13,6 +13,8 @@
 </template>
 
 <script>
+  import clickotherarea from '../../utils/clickotherarea'
+
   export default {
     name: 'selectBox',
     props: {
@@ -38,6 +40,9 @@
         text: '请选择'
       }
     },
+    directives: {
+      clickotherarea
+    },
     methods: {
       handleGetCurrentLi (data, index) {
         if (this.defaultIndex !== null) {
@@ -54,6 +59,9 @@
       showSelectBox () {
         this.visible = !this.visible
       },
+      hideSelectBox () {
+        this.visible = false
+      },
       showAddEventListener () {
         let _this = this
         _this.showEventListener = function (e) {
@@ -69,13 +77,13 @@
       }
     },
     watch: {
-      visible () {
-        if (this.visible) {
-          this.showAddEventListener()
-        } else {
-          this.showRemoveEventListener()
-        }
-      }
+      // visible () {
+      //   if (this.visible) {
+      //     this.showAddEventListener()
+      //   } else {
+      //     this.showRemoveEventListener()
+      //   }
+      // }
     },
     ready () {
       if (this.defaultIndex !== null && this.defaultIndex < this.options.length) {
