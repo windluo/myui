@@ -1,6 +1,8 @@
 <template>
 	<div class="region-pick-container">
-		
+		<div class="region-first">
+			
+		</div>
 	</div>
 </template>
 
